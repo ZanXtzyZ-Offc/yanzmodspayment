@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZanXtzyZ Official - Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8a2be2;
+      --secondary: #ff2a6d;
+      --dark: #0f0c29;
+      --darker: #090618;
+      --accent: #00e5ff;
+      --light: #d1c4e9;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Share Tech Mono', monospace;
+      background: linear-gradient(135deg, var(--darker), var(--dark));
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    .container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    header {
+      margin-bottom: 20px;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+      margin-bottom: 15px;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--light);
+      max-width: 300px;
+      margin: 0 auto 20px;
+    }
+    
+    .payment-container {
+      background: rgba(25, 20, 60, 0.7);
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      max-width: 90%;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      margin-bottom: 25px;
+    }
+    
+    .payment-option {
+      margin-bottom: 15px;
+      text-align: left;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .payment-option:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .payment-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .payment-header i {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: var(--accent);
+    }
+    
+    .payment-header h3 {
+      font-size: 1.1rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid var(--primary);
+      padding: 8px 15px;
+      font-size: 0.85rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Share Tech Mono', monospace;
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+    
+    .btn:hover {
+      background: rgba(138, 43, 226, 0.3);
+    }
+    
+    .btn-copy {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent);
+    }
+    
+    .btn-copy:hover {
+      background: rgba(0, 229, 255, 0.25);
+    }
+    
+    .note {
+      background: rgba(255, 42, 109, 0.15);
+      border-left: 3px solid var(--secondary);
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 300px;
+      margin: 20px auto;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    
+    .note p {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-top: 5px;
+      width: 100%;
+    }
+    
+    footer {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--light);
+    }
+    
+    #output-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    
+    #output {
+      font-size: 1.5rem;
+      padding: 20px;
+      background: rgba(15, 10, 35, 0.9);
+      border-radius: 10px;
+      min-height: 150px;
+      min-width: 250px;
+      max-width: 90%;
+      color: white;
+      text-align: center;
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    
+    #output img {
+      max-width: 200px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    
+    .close-btn {
+      margin-top: 20px;
+      background: var(--secondary);
+      color: white;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .copied-message {
+      background: rgba(0, 229, 255, 0.2);
+      color: var(--accent);
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      display: none;
+    }
+    
+    .music-control {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 10;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--accent); }
+    }
+    
+    .typing {
+      border-right: .15em solid var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 1.5s steps(20, end) forwards, blink-caret .75s step-end infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Music Control -->
+  <div class="music-control" onclick="toggleMusic()">
+    <i class="fas fa-music"></i>
+  </div>
+  
+  <audio id="bg-music" loop>
+    <source src="https://files.catbox.moe/emfblf.mp3" type="audio/mpeg">
+    Browser tidak mendukung elemen audio.
+  </audio>
+
+  <div class="container">
+    <header>
+      <img src="https://files.catbox.moe/0zyqiw.jpg" alt="ZanXtzyZ Official Logo" class="logo">
+      <h1>ZanXtzyZ Official</h1>
+      <p class="subtitle">Developer Payment Gateway</p>
+    </header>
+    
+    <div class="payment-container">
+      <div class="payment-option">
+        <div class="payment-header">
+          <i class="fas fa-wallet"></i>
+          <h3>Payment Dana</h3>
+        </div>
+        <button class="btn" onclick="showPayment('dana')">
+          Tampilkan Nomor
+        </button>
+      </div>
+      
+      <div class="payment-option">
+        <div class="payment-header">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Payment OVO</h3>
+        </div>
+        <button class="btn" onclick="showPayment('ovo')">
+          Tampilkan Status
+        </button>
+      </div>
+      
+      <div class="payment-option">
+        <div class="payment-header">
+          <i class="fas fa-qrcode"></i>
+          <h3>Payment Gopay</h3>
+        </div>
+        <button class="btn" onclick="showPayment('gopay')">
+          Tampilkan Status
+        </button>
+      </div>
+      
+      <div class="payment-option">
+        <div class="payment-header">
+          <i class="fas fa-qrcode"></i>
+          <h3>QRIS Payment</h3>
+        </div>
+        <button class="btn" onclick="showQRIS()">
+          Tampilkan QR
+        </button>
+      </div>
+    </div>
+    
+    <div class="note">
+      <p><i class="fas fa-exclamation-circle"></i> <strong>PENTING:</strong> Jangan lupa sertakan bukti transfer dan kirim ke WhatsApp:</p>
+      <p class="typing">628563707210</p>
+      <a href="https://wa.me/628563707210" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i> Kirim Bukti Transfer
+      </a>
+    </div>
+    
+    <footer>
+      © 2023 ZanXtzyZ Official - Developer
+    </footer>
+  </div>
+  
+  <!-- Output Modal -->
+  <div id="output-wrapper">
+    <div id="output"></div>
+    <button class="close-btn" onclick="closeOutput()">TUTUP</button>
+  </div>
+  
+  <script>
+    // Payment functions
+    function showPayment(type) {
+      const output = document.getElementById("output");
+      const wrapper = document.getElementById("output-wrapper");
+      
+      if (type === 'dana') {
+        output.innerHTML = `
+          <h3><i class="fas fa-wallet"></i> Payment Dana</h3>
+          <p>Nomor Payment:</p>
+          <h2 style="margin: 10px 0; color: var(--accent);">081958466946</h2>
+          <button class="btn btn-copy" onclick="copyToClipboard('081958466946')">
+            <i class="fas fa-copy"></i> Salin Nomor
+          </button>
+          <div class="copied-message" id="copiedMsg">Tersalin!</div>
+          <p style="margin-top: 15px; font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Kirim bukti ke WA: 628563707210
+          </p>
+        `;
+      } else if (type === 'ovo') {
+        output.innerHTML = `
+          <h3><i class="fas fa-mobile-alt"></i> Payment OVO</h3>
+          <p>Nomor Payment:</p>
+          <h2 style="margin: 10px 0; color: var(--accent);">081958466946</h2>
+          <button class="btn btn-copy" onclick="copyToClipboard('081958466946')">
+            <i class="fas fa-copy"></i> Salin Nomor
+          </button>
+          <div class="copied-message" id="copiedMsg">Tersalin!</div>
+          <p style="margin-top: 15px; font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Kirim bukti ke WA: 628563707210
+          </p>
+        `;
+      } else if (type === 'gopay') {
+        output.innerHTML = `
+          <h3><i class="fas fa-qrcode"></i> Payment Gopay</h3>
+          <p>Nomor Payment:</p>
+          <h2 style="margin: 10px 0; color: var(--accent);">081958466946</h2>
+          <button class="btn btn-copy" onclick="copyToClipboard('081958466946')">
+            <i class="fas fa-copy"></i> Salin Nomor
+          </button>
+          <div class="copied-message" id="copiedMsg">Tersalin!</div>
+          <p style="margin-top: 15px; font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Kirim bukti ke WA: 628563707210
+          </p>
+        `;
+      }
+      
+      wrapper.style.display = "flex";
+    }
+    
+    function showQRIS() {
+      const output = document.getElementById("output");
+      const wrapper = document.getElementById("output-wrapper");
+      
+      output.innerHTML = `
+        <h3><i class="fas fa-qrcode"></i> QRIS Payment</h3>
+          <p style="font-size: 1.3rem; color: var(--secondary); margin: 15px 0;">
+            <i class="fas fa-times-circle"></i> Tidak Tersedia
+          </p>
+          <p style="margin-top: 10px; font-size: 0.9rem;">
+          <i class="fas fa-info-circle"></i> Scan QR di atas untuk pembayaran
+        </p>
+        <p style="font-size: 0.9rem;">
+          Kirim bukti ke WA: 628563707210
+        </p>
+      `;
+      
+      wrapper.style.display = "flex";
+    }
+    
+    function closeOutput() {
+      document.getElementById("output-wrapper").style.display = "none";
+    }
+    
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const msg = document.getElementById("copiedMsg");
+        msg.style.display = "block";
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 2000);
+      }).catch(err => {
+        console.error('Gagal menyalin teks: ', err);
+      });
+    }
+    
+    // Music control
+    function toggleMusic() {
+      const music = document.getElementById("bg-music");
+      const icon = document.querySelector('.music-control i');
+      
+      if (music.paused) {
+        music.play();
+        icon.classList.remove('fa-music');
+        icon.classList.add('fa-pause');
+      } else {
+        music.pause();
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-music');
+      }
+    }
+    
+    // Auto play music on page load
+    window.addEventListener('load', function() {
+      const music = document.getElementById('bg-music');
+      const icon = document.querySelector('.music-control i');
+      
+      // Try to play music and update icon
+      music.play().then(() => {
+        icon.classList.remove('fa-music');
+        icon.classList.add('fa-pause');
+      }).catch(error => {
+        console.log('Autoplay prevented:', error);
+        // Show play icon if autoplay was prevented
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-music');
+      });
+    });
+  </script>
+</body>
+</html>
